@@ -1,0 +1,33 @@
+.common-footer {
+  position: fixed;
+  background: $white;
+  border-top: 1px solid;
+  border-color: rgba(0,0,0,0.1);
+  .btn-wrapper {
+    display: flex;
+    justify-content: space-between;
+    .button.btn {
+      background: transparent !important;
+      box-shadow: none;
+      color: $black-c;
+      padding: 15px 0;
+      &:hover, :active, :focus {
+        background: transparent;
+        color: $primary;
+      }
+      ion-icon{
+        padding:10px;
+        font-size: 1.4em;
+      }
+    }
+    .button.btn.active, .button.btn.activated {
+      color: $primary;
+      background: transparent;
+    }
+  }
+}
+
+// use main wrapper for the component where use footer
+.main-wrapper {
+  margin-bottom: 5.6rem;
+}

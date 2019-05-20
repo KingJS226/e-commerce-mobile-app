@@ -1,0 +1,118 @@
+<ion-header>
+    <custom-header [header]="header_data"></custom-header>
+</ion-header>
+
+
+<ion-content class="filter-content animated fadeIn">
+    <div class="main-wrapper" *ngIf="productDetails">
+        <div class="header">
+
+            <!-- bg img -->
+            <ion-slides pager speed="650">
+                
+            <!-- <div class="box" *ngIf="discount>0">
+                    <div class="ribbon">
+                        <span>{{discount}}%&nbsp;{{"Off" | translate}}</span>
+                    </div>
+                </div>-->
+                <ion-slide *ngFor="let thumbnail of thumbnails">
+                    <img src="{{thumbnail.url}}" class="slider-img">
+                </ion-slide>
+            </ion-slides>
+            <span class="border-inside">&#9650;</span>
+
+            <button ion-button icon-only class="btn-like" (click)="addToFavourite()">
+                <ion-icon name="heart-outline" *ngIf="!like"></ion-icon>
+            </button>
+            <button ion-button icon-only class="btn-like" (click)="removeToFavourite()">
+                <ion-icon name="heart" *ngIf="like"></ion-icon>
+            </button>
+
+        </div>
+        <!-- header-end -->
+        <div class="content">
+            <ion-fab top right edge class="fab-icon">
+                <button ion-fab mini class="my-fab">
+                    <ion-icon name="share"></ion-icon>
+                </button>
+                <ion-fab-list>
+                    <button ion-fab (click)="fbSharing()">
+                        <ion-icon name="logo-facebook"></ion-icon>
+                    </button>
+                    <!-- <button ion-fab (click)="twitterSharing()">
+                    <ion-icon name="logo-twitter"></ion-icon>
+                  </button> 
+                    <button ion-fab (click)="googleSharing()">
+                        <ion-icon name="logo-googleplus"></ion-icon>
+                    </button>-->
+                    <button ion-fab (click)="whatsAppSharing()">
+                        <ion-icon ios="logo-whatsapp" md="logo-whatsapp"></ion-icon>
+                    </button>
+                </ion-fab-list>
+            </ion-fab>
+            <div class="dress-title" text-center>{{productDetails.title}}</div>
+
+            <ion-row class="price">
+                <ion-col col-4 class="present-price">{{currency}}{{productDetails.price | number:'.0-0'}}</ion-col>
+                <div *ngIf="discount > 0">
+                    <ion-col col-4 class="dummy-price">{{currency}}{{productDetails.dummyPrice}}</ion-col>
+                    <!--<ion-col col-4><span>{{productDetails.offerPercentage}}%</span></ion-col>-->
+                </div>
+              <!--<div *ngIf="!(productDetails.offerPercentage > 0)">-->
+                <!--<ion-col col-4 class="dummy-price">{{currency}}{{productDetails.price}}</ion-col>-->
+                <!--&lt;!&ndash;<ion-col col-4><span>{{productDetails.offerPercentage}}%</span></ion-col>&ndash;&gt;-->
+              <!--</div>-->
+            </ion-row>
+
+
+            <form [formGroup]="myForm">
+                <div class="size-selector" radio-group formControlName="listOptions">
+                    <ion-row>
+                        <ion-col col-2>
+                            <p class="title">{{"Size" | translate}}</p>
+                        </ion-col>
+
+                        <ion-col col-10>
+                            <div class="wrapper" style="overflow: scroll; display: -webkit-box;">
+                                <ion-item *ngFor="let size of productDetails.size">
+                                    <ion-label>{{size.name}}</ion-label>
+                                    <ion-radio value="{{size.name}}" (ionSelect)="selectSize(size.name)"></ion-radio>
+                                </ion-item>
+                            </div>
+                            <!-- wrapper -->
+                        </ion-col>
+                    </ion-row>
+
+                </div>
+            </form>
+            <h5 text-left padding-left>{{"Product Description" | translate}}</h5>
+            <div class="decription">
+                <p>
+                    <span [innerHTML]="productDetails.description"></span>
+                </p>
+
+                <div class="guide-wrapper" *ngIf="showGuide">
+                <div class="guide-content">
+                  <img src="{{guideUrl}}">
+                </div>
+              </div>
+
+              <p *ngIf="guideUrl != ''" (click)="switchGuide()" style="margin-top: 10px; color: dodgerblue">
+                  <span [innerHTML]="">size guide</span>
+              </p>
+
+            </div>
+            <button ion-button class="btn-sm" full (click)="addToCart(productDetails._id)" [disabled]="disable">
+                {{"Add to bag" | translate}}
+            </button>
+        </div>
+
+    </div>
+    <!-- main wrapper -->
+
+</ion-content>
+<ion-footer>
+
+</ion-footer>
+<!-- common footer -->
+<page-footer></page-footer>

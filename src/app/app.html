@@ -1,0 +1,91 @@
+<ion-menu persistent="true" [content]="content" (ionOpen)="menuOpened()" class="menu" *ngIf="this.platform.dir()==='ltr'" side="left">
+  <ion-content class="sidebar-menu">
+    <div class="cover"></div>
+    <img class="user-img" src="{{user.profilePicture}}">
+    <p class="user-name" menuClose (click)="settings();">{{user.name}}</p>
+    <p class="wallet-amount" *ngIf="isLoggedin()" menuClose><strong>Wallet Balance : {{currency}}{{user.totalLoyaltyPoints | number:'.0-0'}}</strong></p>
+    
+
+    <button menuClose class="menu-item" ion-item (click)="home();">
+      <ion-icon name="home" item-left></ion-icon>
+      {{'Home' | translate}}
+    </button>
+    
+    <button menuClose class="menu-item" ion-item *ngIf="isLoggedin()" (click)="orders();">
+      <ion-icon name="cube" item-left></ion-icon>
+      {{'Orders' | translate}}
+    </button>
+    <button menuClose class="menu-item" ion-item (click)="cart();">
+      <ion-icon name="basket" item-left></ion-icon>
+      {{'Cart' | translate}}
+    </button>
+    <button menuClose class="menu-item" ion-item *ngIf="isLoggedin()" (click)="wishlist();">
+      <ion-icon name="heart" item-left></ion-icon>
+      {{'Wishlist' | translate}}
+    </button>
+   <button menuClose class="menu-item" ion-item *ngIf="isLoggedin()" (click)="settings();">
+      <ion-icon name="settings" item-left></ion-icon>
+      {{'Settings' | translate}}
+    </button>
+    
+    
+    <button menuClose class="menu-item" ion-item *ngIf="!isLoggedin()" (click)="login()">
+      <ion-icon name="log-in" item-left></ion-icon>
+      {{'Login' | translate}}
+    </button>
+    <button menuClose class="menu-item" ion-item *ngIf="isLoggedin()" (click)="logout()">
+      <ion-icon name="log-out" item-left></ion-icon>
+      {{'Logout' | translate}}
+    </button>
+
+  </ion-content>
+
+</ion-menu>
+
+<ion-menu persistent="true" [content]="content" class="menu" *ngIf="this.platform.dir()==='rtl'" side="right">
+  <ion-content class="sidebar-menu">
+    <div class="cover"></div>
+    <img class="user-img" src="{{user.profilePicture}}">
+    <p class="user-name">{{user.name}}</p>
+
+    <button menuClose class="menu-item" ion-item (click)="home();">
+      <ion-icon name="home" item-left></ion-icon>
+      {{'Home' | translate}}
+    </button>
+    
+    <button menuClose class="menu-item" ion-item *ngIf="isLoggedin()" (click)="orders();">
+      <ion-icon name="list-box" item-left></ion-icon>
+      {{'Orders' | translate}}
+    </button>
+    <button menuClose class="menu-item" ion-item (click)="cart();">
+      <ion-icon name="basket" item-left></ion-icon>
+      {{'Cart' | translate}}
+    </button>
+    <button menuClose class="menu-item" ion-item *ngIf="isLoggedin()" (click)="wishlist();">
+      <ion-icon name="heart" item-left></ion-icon>
+      {{'Wishlist' | translate}}
+    </button>
+    <button menuClose class="menu-item" ion-item *ngIf="isLoggedin()" (click)="settings();">
+      <ion-icon name="settings" item-left></ion-icon>
+      {{'Settings' | translate}}
+    </button>
+    
+    
+    <button menuClose class="menu-item" ion-item *ngIf="!isLoggedin()" (click)="login()">
+      <ion-icon name="log-in" item-left></ion-icon>
+      {{'Login' | translate}}
+    </button>
+    <button menuClose class="menu-item" ion-item *ngIf="isLoggedin()" (click)="logout()">
+      <ion-icon name="log-out" item-left></ion-icon>
+      {{'Logout' | translate}}
+    </button>
+
+  </ion-content>
+
+</ion-menu>
+
+
+
+
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

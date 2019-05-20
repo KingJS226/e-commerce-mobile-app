@@ -1,0 +1,231 @@
+<ion-header>
+  <custom-header [header]="header_data"></custom-header>
+</ion-header>
+
+<ion-content class="home-content">
+  <div class="main-wrapper">
+
+
+
+    <div class="category">
+      <!--<h3>WOMEN &#8595; <span style="float: right;">MEN  &#8595;  </span></h3>-->
+      <div style="padding-bottom:1px;">
+
+        <ion-row *ngFor="let menuitem of menuitems let index=index; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }">
+
+          <div class="accordion">
+
+            <ul>
+
+              <li>
+
+                <ion-item class="acc-handle" (click)="expandItem(menuitem)">
+
+                  <ion-row>
+                    <h2 style="margin-left:10px;margin-top:10px; width: 85%;font-weight:bold;font-size:18px;">{{menuitem.item.categorydata.shortDescription}}</h2>
+                    <ion-icon name="add" style="margin-left:10px;margin-top:10px;" *ngIf="menuitem.expanded == false"></ion-icon>
+                    <ion-icon name="remove" style="margin-left:10px;margin-top:10px;" *ngIf="menuitem.expanded == true"></ion-icon>
+                  </ion-row>
+
+                </ion-item>
+
+                  <ion-row class="acc-panel" [ngClass]="{'show-subcategory': menuitem.expanded == true}">
+
+                    
+                    <ion-col col-12>
+                      <ion-row>
+                        <ion-col col-4 *ngFor="let subcat of menuitem.item.subcategorydata" (click)="productGridView(subcat._id,menuitem.item.categorydata._id, subcat.title)">
+
+                          <img class="fullmenu-img" src="{{subcat.imageUrl}}" >
+
+                          <h5 style="text-align:center;font-size: 14px;" >{{subcat.title}}</h5>
+
+                        </ion-col>
+                      </ion-row>
+                    </ion-col>
+
+                  </ion-row>
+
+              </li>
+
+            </ul>
+
+          </div>
+
+        </ion-row>
+
+      </div>
+      <!-- slider -->
+    
+      <!-- <img src="assets/img/banner1.jpg" class="sli-img"> -->
+  <!--
+  <div class="overlay">
+    <div class="text">
+      <h6> {{"TOP BRANDS" | translate}}</h6>
+      <h1>{{"NEW SEASON NOW ENJOY LIFE" | translate}}</h1>
+    </div>
+  </div>
+  -->
+
+
+<!-- slider wrapper -->
+
+      <ion-row *ngIf="banner1.bannerUrl" class="category-content" style="padding:0px;">
+        <ion-col col-12 class="category-item c-item" (click)="productBannerDirect(banner1._id,banner1.bannerUrl,banner1.title)">
+          <span *ngIf="banner1.bannerUrl"></span>
+          <div class="category-img">
+            <img item-right src="{{banner1.bannerUrl}}">
+            <!--<div class="overlay-img">
+              <h4 text-center class="title">{{category.title}}</h4>
+            </div>
+            overlay-img-->
+          </div>
+          <!--category-img-->
+        </ion-col>
+      </ion-row>
+      <div class="slider-wrapper" >
+        <!--<div class="featuredtitle">Featured Products</div>-->
+        <ion-slides *ngIf="featuredProducts.length>0"   class="image-slider slides" autoplay="3000" loop="true" speed="500"  slidesPerView="3" #slide1 dir="rtl">
+          <ion-slide *ngFor="let product of featuredProducts" (click)="productDetails(product._id, product.title, product.categoryId)">
+            <div class="category-img producttitle">
+             <img src="{{product.imageUrl.url}}" alt="Product Image" class="thumb-img" imageViewer>
+             
+            </div>
+            
+          </ion-slide>
+        </ion-slides>
+      </div>
+
+      <ion-row class="category-content">
+        <ion-col col-6 class="category-item animated fadeIn" *ngFor="let category of categories" (click)="productCategoryDirect(category._id,category.imageUrl,category.title)">
+          <span *ngIf="category.imageUrl"></span>
+          <div class="category-img">
+            <img item-right src="{{category.imageUrl}}">
+            <!--<div class="overlay-img">
+              <h4 text-center class="title">{{category.title}}</h4>
+            </div>
+            overlay-img-->
+          </div>
+          <!--category-img-->
+        </ion-col>
+      </ion-row>
+
+      <ion-row  *ngIf="banner2.bannerUrl" class="category-content" style="padding:0px;">
+        <ion-col col-12 class="category-item c-item" (click)="productBannerDirect(banner2._id,banner2.bannerUrl,banner2.title)">
+          <span *ngIf="banner2.bannerUrl"></span>
+          <div class="category-img">
+            <img item-right src="{{banner2.bannerUrl}}">
+            <!--<div class="overlay-img">
+              <h4 text-center class="title">{{category.title}}</h4>
+            </div>
+            overlay-img-->
+          </div>
+          <!--category-img-->
+        </ion-col>
+      </ion-row>
+
+      <div *ngIf="featuredProducts2.length>0"   class="slider-wrapper" >
+        <div class="featuredtitle">Featured Products2</div>
+        <ion-slides  class="image-slider slides" autoplay="3000" loop="true" speed="500"  slidesPerView="3" #slide1 dir="rtl">
+          <ion-slide *ngFor="let product of featuredProducts2" (click)="productDetails(product._id, product.title, product.categoryId)">
+            <div class="category-img producttitle">
+             <img src="{{product.imageUrl.url}}" alt="Product Image" class="thumb-img" imageViewer>
+             
+            </div>
+            
+          </ion-slide>
+        </ion-slides>
+      </div>
+      <ion-row  *ngIf="banner3.bannerUrl" class="category-content" style="padding:0px;">
+        <ion-col col-12 class="category-item c-item" (click)="productBannerDirect(banner3._id,banner2.bannerUrl,banner3.title)">
+          <span *ngIf="banner3.bannerUrl"></span>
+          <div class="category-img">
+            <img item-right src="{{banner3.bannerUrl}}">
+            <!--<div class="overlay-img">
+              <h4 text-center class="title">{{category.title}}</h4>
+            </div>
+            overlay-img-->
+          </div>
+          <!--category-img-->
+        </ion-col>
+      </ion-row>
+      <ion-row  *ngIf="banner4.bannerUrl" class="category-content" style="padding:0px;">
+        <ion-col col-12 class="category-item animated fadeIn" (click)="productBannerDirect(banner4._id,banner4.bannerUrl,banner4.title)">
+          <span *ngIf="banner4.bannerUrl"></span>
+          <div class="category-img">
+            <img item-right src="{{banner4.bannerUrl}}">
+            <!--<div class="overlay-img">
+              <h4 text-center class="title">{{category.title}}</h4>
+            </div>
+            overlay-img-->
+          </div>
+          <!--category-img-->
+        </ion-col>
+      </ion-row>
+      <div *ngIf="featuredProducts3.length>0"   class="slider-wrapper" >
+        <div class="featuredtitle">Featured Products3</div>
+        <ion-slides  class="image-slider slides" autoplay="3000" loop="true" speed="500"  slidesPerView="3" #slide1 dir="rtl">
+          <ion-slide *ngFor="let product of featuredProducts3" (click)="productDetails(product._id, product.title, product.categoryId)">
+            <div class="category-img producttitle">
+             <img src="{{product.imageUrl.url}}" alt="Product Image" class="thumb-img" imageViewer>
+             
+            </div>
+            
+          </ion-slide>
+        </ion-slides>
+      </div>
+
+
+    </div>
+    <!--category-->
+
+    
+  </div>
+  <!-- main-wrapper -->
+  <div style="min-height:10em;background:#333;padding:10px 10px 10px 10px;">
+    
+    <ion-row>
+      <p style="color:#ccc;">
+        Customer Care : +91 8800679900
+      </p>
+    </ion-row>
+    <ion-row>
+      <p style="color:#ccc;margin: 0 0 0.5em 0;">
+        © 2019 Yogue Activewear. </p>
+    </ion-row>
+    <ion-row>
+      <p style="color:#ccc;">
+        Made With Love & Care In India.
+      </p>
+    </ion-row>
+    <ion-row>
+      <img src="assets/icon/Visa.svg" alt="Visa" style="margin: 0 0.2em 0 0;">      
+      
+    
+      <img src="assets/icon/Master.svg" alt="Master" style="margin: 0 0.2em 0 0;">
+      <img src="assets/icon/Rupay.svg" alt="Rupay" style="margin: 0 0.2em 0 0;">
+      <img src="assets/icon/Netbanking.svg" alt="Netbanking" style="margin: 0 0.2em 0 0;">
+    
+      <img src="assets/icon/Mobikwik.svg" alt="Mobikwik" style="margin: 0 0.2em 0 0;">
+    
+      
+    
+      <img src="assets/icon/OlaMoney.svg" alt="Ola money" style="margin: 0 0.2em 0 0;">
+    
+      <img src="assets/icon/Payzapp.svg" alt="Payzapp" style="margin: 0 0.2em 0 0;">
+    
+      
+      <img src="assets/icon/AirtelMoney.svg" alt="Airtel money" style="margin: 0 0.2em 0 0;">
+              
+      <img src="assets/icon/Freecharge.svg" alt="Freecharge" style="margin: 0 0.2em 0 0;">
+    
+      
+    
+  
+    </ion-row>
+
+  </div>
+
+</ion-content>
+<!-- common footer -->
+<page-footer></page-footer>

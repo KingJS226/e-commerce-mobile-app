@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{"Address" | translate}} </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="address" padding>
+  <form (ngSubmit)="onSubmitAddress()" #f="ngForm">
+    <ion-list class="form-data">
+      <ion-item>
+        <ion-input type="text" name="name" id="name" placeholder="{{'Name' | translate}}" [(ngModel)]="address.userName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" name="homeNo" id="homeNo" placeholder="{{'House No. , Locality' | translate}}" [(ngModel)]="address.addressline"></ion-input>
+      </ion-item>
+      <!--
+      <ion-item>
+        <ion-input type="text" name="landmark" id="landmark" placeholder="{{'Landmark' | translate}}" [(ngModel)]="address.landmark"
+          required></ion-input>
+      </ion-item>
+      -->
+      <ion-item>
+        <ion-input type="text" name="city" id="city" placeholder="{{'City' | translate}}" [(ngModel)]="address.city" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label style="background: white; border: 1px solid #fefefe; margin-top:20px;">
+          <ion-select [(ngModel)]="zone.kind" interface="popover" [ngModelOptions]="{standalone: true}">
+            <ion-option *ngFor="let key of countries" (ionSelect)="selecte(key.title)" >{{key.title}}</ion-option>
+          </ion-select>
+        </ion-label>
+      </ion-item>
+      
+      <ion-item>
+        <ion-input type="number" name="pincode" id="pincode" placeholder=" {{'Pincode' | translate}}" [(ngModel)]="address.pincode"
+          required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="number" name="phone" id="phone" placeholder="{{'Phone' | translate}}" [(ngModel)]="address.mobileNo"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-row class="buttons">
+      <ion-col>
+        <button ion-button class="btn-lg" type="submit" [disabled]="!f.valid">{{'Submit' | translate}}
+        </button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

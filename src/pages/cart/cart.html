@@ -1,0 +1,90 @@
+<ion-header>
+  <custom-header [header]="header_data"></custom-header>
+</ion-header>
+
+<ion-content class="cart animated slideInDown" padding>
+  <div *ngIf="!isCart()">
+    <ion-row>
+      <ion-icon class="empty-cart" name="cart"></ion-icon>
+    </ion-row>
+    <h4>{{"Your Cart is empty" | translate}}!</h4>
+    <button ion-button class="continue-btn empty" (click)="home()">{{"Add Items" | translate}}</button>
+  </div>
+  <div *ngIf="isCart()">
+    <ion-list>
+      <ion-item *ngFor="let cartItem of itemsInCart">
+        <!--<ion-icon item-left name="close-circle" (click)="deleteItem(cartItem)"></ion-icon>-->
+        <ion-thumbnail item-start>
+          <img src="{{cartItem.imageUrl}}">
+        </ion-thumbnail>
+        <h2>{{cartItem.title}}</h2>
+        <p class="price">{{currency}}{{cartItem.itemTotalPrice | number:'.0-0'}}</p>
+        <p class="size">{{"Size" | translate}}:{{cartItem.size}}</p>
+        <div item-end class="counter">
+          <p class="plus" (click)="addQuantity(cartItem)">+</p>
+          <p class="value">{{cartItem.quantity}}</p>
+          <p class="minus" (click)="removeQuantity(cartItem)">-</p>
+        </div>
+        <p class="remove" (click)="deleteItem(cartItem)">{{"Remove" | translate}}</p>
+      </ion-item>
+    </ion-list>
+
+    <ion-row class="price-details">
+      <ion-col col-12 class="calculate">
+        <p class="bill-detail">{{"Price Subtotal" | translate}}
+          <span>{{currency}}{{subTotalPrice | number:'.0-0'}}</span>
+        </p>
+        <p *ngIf="deductedPrice" class="bill-detail">{{"Deducted Price" | translate}}
+          <span> -{{currency}}{{deductedPrice | number:'.0-0'}}</span>
+        </p>
+        
+        <p class="bill-detail">{{taxName}}
+          <span>{{currency}}{{ subTotalPrice*taxPercentage}}</span>
+        </p>
+        <p class="bill-detail">{{"Delivery Charge" | translate}}&nbsp;&nbsp;
+          <span> {{currency}}{{chargeAmount | number:'.0-0'}}</span>
+        </p>
+        <hr>
+        <!--
+        <ion-row>
+          <ion-col col-4>
+            <p class="bill-detail">{{"Apply Coupon" | translate}}</p>
+          </ion-col>
+          <ion-col col-8>
+            <ion-item class="select-item" >
+              <ion-label>{{"Coupons" | translate}}</ion-label>
+              <ion-select [(ngModel)]="discount" (ionChange)="applyCoupon()" interface="popover">
+                <ion-option *ngFor="let coupon of coupons" value="{{coupon.couponPercentage}}">
+                  {{coupon.title}}
+                </ion-option>
+              </ion-select>
+
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-6>
+            <p class="coupon-applied" *ngIf="deductedPrice">{{"Coupon Applied" | translate}}.</p>
+          </ion-col>
+          <ion-col col-6>
+            <p class="bill-detail" text-right *ngIf="deductedPrice" (click)="removeAppliedCoupon()">{{"Remove Coupon" | translate}} </p>
+          </ion-col>
+        </ion-row>
+        -->
+        <p class="cart-total">
+          <strong> {{"Order Total" | translate}}</strong>
+          <span class="price">{{currency}}{{grandTotal | number:'.0-0'}}</span>
+        </p>
+      </ion-col>
+
+    </ion-row>
+    <!-- row-bill-deatails -->
+
+    <ion-footer style="
+    margin-bottom: 50px">
+      <button style="margin-bottom: 50px" (click)="navigateToAddressListPage()" ion-button class="btn-lg" full>{{"Checkout" | translate}}</button>
+    </ion-footer>
+  </div>
+</ion-content>
+<!-- common footer -->
+<page-footer></page-footer>

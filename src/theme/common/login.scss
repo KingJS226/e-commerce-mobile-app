@@ -1,0 +1,68 @@
+.login-content {
+  background-image: url("../assets/img/menu2.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+  .logo-img {
+    width: 11rem;
+    height: 11rem;
+    margin: 4rem 0 0;
+  }
+  .input-wrap {
+     padding: 0 5rem 0 3rem;
+     .item {
+       border: 0;
+       color: $white;
+       background-color: transparent;
+       .item-inner {
+         border-bottom: 1px solid !important;
+         border-color: rgba(256, 256, 256, 0.2) !important;
+       }
+     }
+   }
+  .input-wrap1 {
+    padding: 0 5rem 0 3rem;
+    .item {
+      border: 0;
+      color: $white;
+      padding: 0px!important;
+      background-color: transparent;
+      border-bottom: 1px solid !important;
+      border-color: rgba(256, 256, 256, 0.2) !important;
+
+    }
+  }
+  .btn-lg {
+    margin: 3rem 0 0.5em;
+    width: 73%;
+  }
+  .forget-pass-link {
+    font-size: 16px;
+    color: $danger;
+    display: block;
+    margin-bottom: 0;
+  }
+  .divider {
+    width: 42%;
+    border-bottom: 1px solid $white;
+    margin: 4px 0;
+    display: inline-block;
+  }
+  .divider-text {
+    color: $white;
+  }
+  p {
+    font-size: 15px;
+    color: $white;
+    margin-top: 3rem;
+    a {
+      color: $danger;
+      font-size: 16px;
+    }
+  }
+  .social-icon {
+    width: 86px;
+    padding: 0px 20px;
+  }
+}

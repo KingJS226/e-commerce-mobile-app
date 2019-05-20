@@ -1,0 +1,68 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{"Settings" | translate}}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="settings">
+    <div *ngIf="!isLoggedin()">
+        <ion-row>
+            <ion-icon class="empty-cart" name="settings"></ion-icon>
+        </ion-row>
+        <h4>{{"You are not logged in" | translate}}!</h4>
+        <button ion-button class="continue-btn" (click)="login()">{{'Please Login' | translate}} </button>
+    </div>
+    <div *ngIf="isLoggedin()">
+        <form (ngSubmit)="updateProfile()" #f="ngForm">
+            <img class="banner" src="assets/img/banner1.jpg" style="height: auto;">
+            <ion-row>
+                <img *ngIf="userInfo.imageUrl &&!preview" class="img" src="{{userInfo.imageUrl}}">
+                <br>
+                <img *ngIf="preview" class="img" [src]="preview">
+                <br>
+                <img *ngIf="!preview &&!userInfo.imageUrl" class="img" src="assets/img/profile.jpg">
+                <br>
+            </ion-row>
+            <ion-row>
+                <input type="file" name="file" id="file" ng2FileSelect [uploader]="uploader" class="inputfile" accept="image/*" (change)="readUrl($event)">
+                <label for="file" class="upload">
+                    <ion-icon ios="ios-cloud-upload" md="md-cloud-upload"></ion-icon>
+                </label>
+            </ion-row>
+
+            <p class="change-password" (click)="updatePassword()">
+                <ion-icon name="create"></ion-icon> &nbsp; {{"Change Password" | translate}}
+            </p>
+
+            <ion-list>
+                <!--
+                <ion-item>
+                    <ion-label>{{'Languages' | translate}}</ion-label>
+                    <ion-select [(ngModel)]="value" (ionChange)="changeLanguage()" name="language">
+                        <ion-option *ngFor="let option of options" value="{{option.value}}">{{option.language | translate}}</ion-option>
+
+                    </ion-select>
+                </ion-item>
+                card no-->
+                <ion-item>
+                    <ion-input type="text" name="name" id="name" placeholder="{{'Your Name' | translate}}" [(ngModel)]="userInfo.name"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-input type="email" name="email" id="email" placeholder="{{'Your Email' | translate}}" [(ngModel)]="userInfo.email" required></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-input type="text" name="mobileNo" id="mobileNo" placeholder="{{'Mobile No' | translate}}" [(ngModel)]="userInfo.contactNumber" disabled></ion-input>
+                </ion-item>
+            </ion-list>
+            <!--buttons-->
+            <ion-row>
+                <ion-col>
+                    <button ion-button class="btn-lg" type="submit">{{"Save" | translate}}</button>
+                </ion-col>
+            </ion-row>
+        </form>
+    </div>
+</ion-content>
+
+<!-- common footer -->
+<page-footer></page-footer>

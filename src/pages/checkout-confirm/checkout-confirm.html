@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{"Checkout" | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="confirm" padding>
+
+  <ion-row class="heading">
+    <ion-col col-6 class="head-cart">
+      <h5 class="cart">{{"Cart" | translate}}</h5>
+    </ion-col>
+    <ion-col col-6>
+      <p class="edit" padding-right (click)="cart()">
+        <ion-icon name="create"></ion-icon>
+      </p>
+    </ion-col>
+  </ion-row>
+  <!--product details-->
+  <ion-row class="details" *ngFor="let item of orderData.cartItems">
+    <ion-col col-10>
+      <p class="name">{{item.title}} </p>
+      
+      <p class="other-details">{{"Size" | translate}} : {{item.size}}</p>
+      
+    </ion-col>
+    <ion-col col-2>
+      <p class="value">{{currency}}{{item.itemTotalPrice | number:'.0-0'}}</p>
+    </ion-col>
+  </ion-row>
+
+
+  <!--total-->
+  <ion-col class="total">
+    <h4>{{"Total" | translate}}:
+      <span>{{currency}}{{orderData.grandTotal | number:'.0-0'}}</span>
+    </h4>
+  </ion-col>
+
+  <!--address-->
+  <ion-row class="address">
+    <ion-col *ngIf="orderData.shippingDetails">
+      <h5>{{"Address" | translate}}</h5>
+    </ion-col>
+    <ion-col>
+      <span (click)="updateAddress()" padding-right>
+        <ion-icon name="create"></ion-icon>
+      </span>
+    </ion-col>
+  </ion-row>
+  <ion-row class="address-line">
+    <p>{{orderData.shippingDetails.userName}}
+      
+      <br> {{orderData.shippingDetails.addressline}}
+      <br> {{orderData.shippingDetails.city}} {{orderData.shippingDetails.state}}
+      <br> {{orderData.shippingDetails.pincode}}
+      <br> {{orderData.shippingDetails.mobileNo}}
+    </p>
+  </ion-row>
+  <!--</ion-row>-->
+</ion-content>
+<ion-footer>
+  <button (click)="placeOrder()" ion-button class="btn-lg">{{"Confirm" | translate}}</button>
+</ion-footer>

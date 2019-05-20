@@ -1,0 +1,18 @@
+page-product {
+
+    .my-fab{
+        background: $dark-grey;
+    }
+
+    .guide-wrapper{
+      position: relative;
+      height: 100%;
+      .guide-content{
+        position: relative;
+        overflow: scroll;
+
+      }
+
+    }
+
+}

@@ -1,0 +1,247 @@
+.filter-content {
+  .header {
+    height: 32em;
+    text-align: center;
+    position: relative;
+    img {
+      height: 100%;
+      width: 100%;
+      border-bottom: 1px solid $white-c;
+      padding-top: 22px;
+    }
+    .border-inside {
+      position: absolute;
+      color: $white;
+      font-size: 42px;
+      bottom: -24px;
+    }
+    .btn-like {
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      background: transparent;
+      color: $red;
+      box-shadow: none;
+      z-index: 99;
+    }
+    .box {
+      //width: 200px; height: 300px;
+      //position: relative;
+      //border: 1px solid #BBB;
+      //background: #EEE;
+    }
+    .ribbon {
+      position: absolute;
+      right: -5px; top: -5px;
+      z-index: 1;
+      overflow: hidden;
+      width: 75px; height: 75px;
+      text-align: right;
+    }
+    .ribbon span {
+      font-size: 9px;
+      font-weight: bold;
+      color: #FFF;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 20px;
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+      width: 100px;
+      display: block;
+      background: #ff6600;
+      background: linear-gradient($danger 100%);
+      box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+      position: absolute;
+      top: 25px; right: -19px;
+    }
+    .ribbon span::before {
+      content: "";
+      position: absolute; left: 0px; top: 100%;
+      z-index: -1;
+      border-left: 3px solid $danger;
+      border-right: 3px solid transparent;
+      border-bottom: 3px solid transparent;
+      border-top: 3px solid $danger;
+    }
+    .ribbon span::after {
+      content: "";
+      position: absolute; right: 0px; top: 100%;
+      z-index: -1;
+      border-left: 3px solid transparent;
+      border-right: 3px solid $danger;
+      border-bottom: 3px solid transparent;
+      border-top: 3px solid $danger;
+    }
+
+  }
+  //header-end
+  .content {
+    margin-top: 2rem;
+    .dress-title {
+      color: $primary;
+      font-size: 20px;
+      margin: 10px 0;
+      font-weight: 500;
+      text-transform: capitalize;
+    }
+    .price {
+      font-size: 15px;
+      font-weight: 500;
+      color: $black-c;
+      padding: 10px 0;
+      border-bottom: 1px solid;
+      border-color: rgba(0, 0, 0, 0.05);
+      justify-content: center;
+      .present-price{
+        font-size: 1.8rem;
+        color: $black;
+        font-weight: 600;
+      }
+      .col {
+        padding: 0;
+      }
+      .dummy-price {
+        text-decoration: line-through;
+        color: $black-b;
+      }
+      span {
+        background: $cyan;
+        font-size: 13px;
+        font-weight: 300;
+        color: $white;
+        padding: 2px 8px;
+        margin-left: 24px;
+      }
+    }
+    .color-selector {
+      border-bottom: 1px solid;
+      border-color: rgba(0, 0, 0, 0.05);
+      .title {
+        text-transform: uppercase;
+        font-weight: 500;
+        color: $black-a;
+        margin: 15px 10px 10px;
+      }
+      .item {
+        .item-inner {
+          border: 0;
+        }
+        padding-left: 0px;
+        height: auto !important;
+      }
+      .wrapper {
+        display: flex;
+        .item-block {
+          width: auto !important;
+          border-bottom: 0;
+        }
+        ion-label {
+          border: 2px solid #fff;
+          text-align: center;
+          height: 40px !important;
+          width: 40px !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          background: red;
+          border-radius: 50% !important;
+          box-sizing: content-box;
+          line-height: 36;
+        }
+        .radio .radio-icon {
+          width: 33px;
+          height: 33px;
+        }
+        .red {
+          background: red;
+        }
+        .Orange {
+          background: orange;
+        }
+        .blue {
+          background: blue;
+        }
+        .yellow {
+          background: yellow;
+        }
+        .gren {
+          background: green;
+        }
+        .black {
+          background: black;
+        }
+        .maroon {
+          background: maroon
+        }
+        // border color of sected item
+        .item-radio-checked ion-label {
+          border-color: #69717d !important;
+        }
+        ion-radio {
+          position: absolute;
+          opacity: 0;
+          margin: 0;
+        }
+      }
+    }
+    //color-selector
+    .size-selector {
+      @extend .color-selector;
+      .wrapper {
+
+        ion-label {
+          border: 2px solid #d5d5d5;
+          font-size: 15px;
+          font-weight:700;
+          text-align: center;
+          padding-top: 5px;
+          height: 38px !important;
+          width: 38px !important;
+          color: $black-a;
+          background: white;
+          border-radius: 0;
+          line-height: 36px;
+        }
+        .item-radio-checked ion-label {
+          color: $white;
+          background: $primary;
+        }
+
+      }
+
+    }
+    .delivery-option {
+      border-bottom: 1px solid $white-c;
+      .btn {
+        color: $primary;
+        font-size: 15px;
+      }
+    }
+    h3{
+      color: $black-a;
+    }
+    .decription{
+      padding: 0 15px;
+      ion-icon {
+        font-size: 1.5rem;
+        color: $primary;
+      }
+      P{
+          color: $black-b;
+        margin-top: -2px;
+        margin-bottom: 7px;
+        font-size: 15px;
+      }
+
+    }
+
+
+  }
+  .button {
+    margin: 2em 0;
+  }
+  ion-fab[top][edge] {
+    top: 39px;
+  }
+
+}

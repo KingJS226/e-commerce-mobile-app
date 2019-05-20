@@ -1,0 +1,31 @@
+<ion-navbar>
+  <button *ngIf="header_data.ismenu" ion-button icon-only menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+  <ion-title  [ngClass]="{'ishome-title': header_data.ishome,'ismeun-centre': !header_data.ishome}">
+    {{header_data.title}}
+  </ion-title>
+
+  <ion-buttons end>
+    <button *ngIf="header_data.isSearch" ion-button icon-only class="header-btn" (click)="searchToggle()">
+      <ion-icon name="search"></ion-icon>
+    </button>
+
+    <button (click)="gotoCart()" *ngIf="header_data.isCart" ion-button icon-only class="header-btn">
+      <ion-icon name="basket"></ion-icon>
+      <ion-badge class="carts" item-right>{{noOfItems}}</ion-badge>
+    </button>
+  </ion-buttons>
+
+
+</ion-navbar>
+<ion-row *ngIf="!searchBarVisible" style="background-color: black; opacity: 0.8">
+  <ion-col col-9 >
+    <ion-input  [(ngModel)]="keywords" style="border-bottom: 1px solid white;color: white;font-size: 18px">
+
+    </ion-input>
+  </ion-col>
+  <ion-col col-3>
+    <button ion-button *ngIf="keywords != null && keywords.length>0" style="background-color: red" (click)="searchProducts()">Search</button>
+  </ion-col>
+</ion-row>

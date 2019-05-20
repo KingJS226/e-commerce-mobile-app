@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{"Payment" | translate}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="payment-page">
+
+  <ion-row class="amount-block">
+    <ion-col col-5>
+      <h5 class="total" style="margin-left:15px;"> {{"Total " | translate}}: Rs.
+        <span class="currency">{{currency}}{{payTotal | number:'.0-0'}}
+        </span>
+      </h5>
+    </ion-col>
+    <ion-col col-7>
+      <h5 class="total right">{{ "Wallet Balance " | translate}}: Rs.
+        <span class="currency">{{currency}}{{ loyaltyPoints | number:'.0-0'}}</span>
+      </h5>
+    </ion-col>
+    <ion-item class="loyality-check">
+      <ion-label>{{"Use Wallet Balance" | translate}}</ion-label>
+      <ion-checkbox [disabled]="loyaltyPoints < loyaltyObj.minLoyalityPoints" checked="checked" (ionChange)="updateLoyality($event)"></ion-checkbox>
+    </ion-item>
+    
+    <div *ngIf="checked == true">
+      <h5 class="total" style="margin-left:15px;"> {{"Amount to be paid" | translate}}: Rs.
+        <span class="currency">{{currency}}{{orderData.amount_to_pay | number:'.0-0'}}</span>
+      </h5>
+    </div>
+  </ion-row>
+
+
+  <ion-list radio-group class="radio-list">
+    <p class="card-title">{{"Payment Options" | translate}}</p>
+    <ion-list radio-group *ngIf="!onlyLoyaltyPay">
+      <ion-row class="card-type">
+        <ion-col col-12 *ngFor=" let payment of paymentTypes">
+          <ion-item class="radio-item">
+            <ion-label>{{payment.type=="ragorpay"?"NetBanking / DebitCard / CreditCard / UPI":payment.type=="COD"?"Cash on Delivery (COD)":payment.type}}</ion-label>
+            <ion-radio item-left value="{{payment.value}}" checked={{payment.default}} (ionSelect)="choosePaymentType(payment.value)"></ion-radio>
+            <img *ngIf="payment.logo" src="{{payment.logo}}" item-right>
+          </ion-item>
+          <ion-row *ngIf="payment.type == 'COD'">
+            <button *ngIf="paymentType == 'COD'" class="otp-button"  [disabled]="!requestable" (click)="requestOtp()">Request OTP </button>
+            <ion-input *ngIf="enableOtpInput" type="number" name="otp_code" class="input-otp" [(ngModel)]="optCode"></ion-input>
+          </ion-row>
+
+        </ion-col>
+      </ion-row>
+    </ion-list>
+    <h6 class="form-title"></h6>
+    <section class="payment" *ngIf="paymentType=='stripe'">
+      <form>
+        <ion-list class="form-data">
+          <ion-item>
+            <ion-input type="number" name="cardNumber" id="cardNumber" placeholder="{{'Card Number' | translate}}" [(ngModel)]=stripe_card.cardNumber
+              required></ion-input>
+            <ion-icon name="card" item-right></ion-icon>
+          </ion-item>
+
+          <ion-row class="form-half">
+            <ion-col col-2>
+              <ion-item>
+                <ion-input type="number" name="month" id="month" placeholder="{{'MM' | translate}}" [(ngModel)]=stripe_card.expiryMonth required></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col col-4>
+              <ion-item>
+                <ion-input type="number" name="year" id="year" placeholder=" {{'YYYY' | translate}}" [(ngModel)]=stripe_card.expiryYear required></ion-input>
+                <ion-icon name="calendar" item-right></ion-icon>
+              </ion-item>
+            </ion-col>
+            <ion-col col-6>
+              <ion-item class="right">
+                <ion-input type="number" name="cvv" id="cvv" placeholder="{{'Card Code' | translate}}" [(ngModel)]=stripe_card.cvc required></ion-input>
+                <ion-icon name="code" item-right></ion-icon>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-item>
+            <ion-input type="text" name="cardName" id="cardName" placeholder="{{'Card Holder Number' | translate}}" required></ion-input>
+            <ion-icon name="person" item-right></ion-icon>
+          </ion-item>
+        </ion-list>
+      </form>
+    </section>
+    <div class="btn-wrapper" *ngIf="!onlyLoyaltyPay">
+      <button *ngIf="paymentType != 'COD'" ion-button class="btn-lg" type="button" (click)="makePayment()" >{{"Pay Now" | translate}}</button>
+      <button *ngIf="paymentType == 'COD' && optCode" ion-button class="btn-lg" type="button" [disabled]="optCode.toString().length>6 || optCode.toString().length<6" (click)="makePayment()">{{"ORDER NOW" | translate}}</button>
+    </div>
+    <div class="btn-wrapper" *ngIf="onlyLoyaltyPay">
+      <!--<button *ngIf="paymentType != 'COD'" ion-button class="btn-lg" type="button" (click)="makePayment()" >{{"Pay Now" | translate}}</button>-->
+      <button  ion-button class="btn-lg" type="button"  (click)="makePayment()">{{"ORDER NOW" | translate}}</button>
+    </div>
+  </ion-list>
+
+</ion-content>

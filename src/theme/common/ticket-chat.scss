@@ -1,0 +1,69 @@
+.chat-content{
+  .scroll-content{
+    margin-bottom:70px;
+  }
+  background: $white-b;
+  .chat-box{
+    padding-top: 1.4rem;
+    img{
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+    .speech-bubble {
+      position: relative;
+      padding: 15px;
+      color: #333;
+      background: $white;
+      border-radius: 10px;
+      span{
+        position: absolute;
+        top: 4px;
+        right: 8px;
+        font-size: 10px;
+        font-weight: 500;
+        color: $black-c;
+      }
+    }
+    .speech-bubble2 {
+      position: relative;
+      padding: 15px;
+      color: #333;
+      background: $white;
+      border-radius: 10px;
+      span{
+        position: absolute;
+        top: 4px;
+        right: 8px;
+        font-size: 10px;
+        font-weight: 500;
+        color: $black-c;
+      }
+    }
+
+  }//chat-box
+  ion-footer {
+    left: 0;
+    bottom: 0;
+    position: fixed;
+    z-index: 10;
+    display: block;
+    width: 100%;
+    background-color: #fff;
+    .col{
+      position:relative;
+      bottom:0;
+      left:0;
+    }
+    ::placeholder {
+      color: $black-c;
+    }
+  }
+  button{
+    background-color:transparent !important;
+    color:$primary !important;
+  }
+  .text-input{
+    margin: 12px 8px 0px;
+}
+}

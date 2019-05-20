@@ -1,0 +1,115 @@
+<ion-header>
+    <custom-header [header]="header_data"></custom-header>
+</ion-header>
+
+
+<ion-content class="grid-content2 animated fadeInUp">
+
+  <div *ngIf="!isProduct">
+    <p> {{"Products not found" | translate}}</p>
+    <p>{{"Please refine again" | translate}}.</p>
+  </div>
+
+  <div *ngIf="isProduct" class="main-wrapper">
+
+        
+
+    <div class="product-grid">
+            <!-- grid item -->
+      <div>
+        <ion-row *ngFor="let menuitem of menuitems">
+
+          <div class="accordion">
+
+              <ul>
+
+                  <li>
+    
+                    <ion-item class="acc-handle" (click)="expandItem(menuitem)">
+    
+                      <ion-row>
+                        <h2 style="margin-left:10px;margin-top:10px; width: 85%;font-weight:bold;font-size:18px;">{{menuitem.item.categorydata.shortDescription}}</h2>
+                        <ion-icon name="add" style="margin-left:10px;margin-top:10px;" *ngIf="menuitem.expanded == false"></ion-icon>
+                        <ion-icon name="remove" style="margin-left:10px;margin-top:10px;" *ngIf="menuitem.expanded == true"></ion-icon>
+                      </ion-row>
+    
+                    </ion-item>
+    
+                      <ion-row class="acc-panel" [ngClass]="{'show-subcategory': menuitem.expanded == true}">
+    
+                        
+                        <ion-col col-12>
+                          <ion-row>
+                            <ion-col col-4 *ngFor="let subcat of menuitem.item.subcategorydata" (click)="productGridView(subcat._id,menuitem.item.categorydata._id, subcat.title)">
+    
+                              <img class="fullmenu-img" src="{{subcat.imageUrl}}" >
+    
+                              <h5 style="text-align:center;font-size: 14px;" >{{subcat.title}}</h5>
+    
+                            </ion-col>
+                          </ion-row>
+                        </ion-col>
+    
+                      </ion-row>
+    
+                  </li>
+    
+                </ul>
+
+          </div>
+
+        </ion-row>
+        <ion-label style="background: white; border: 1px solid #fefefe; margin-top:20px;">
+          <ion-select [(ngModel)]="zone.kind" interface="popover">
+            <ion-option *ngFor="let key of modeKeys" (ionSelect)="selecte(key.value)">{{key.title}}</ion-option>
+          </ion-select>
+        </ion-label>
+<!--
+        <ion-row class="header-btn">
+            
+      <ion-col text-center class="col-divider" (click)="refine()">
+        <div icon-left class="btn">
+          <ion-icon name="shuffle"></ion-icon>&nbsp;&nbsp;{{"Filter" | translate}}
+        </div>
+      </ion-col>
+
+    </ion-row>-->
+
+      </div>
+
+      <ion-row >
+
+        <ion-col col-6 class="grid-item" *ngFor="let product of products" (click)="productDetails(product._id,product.title)" style="overflow: scroll">
+
+          <ion-col col-12 *ngIf="product.active">
+            <img style="width:auto;height:auto;margin-bottom: 5px;"  src="{{product.imageUrl.url}}">
+          </ion-col>
+
+          <ion-row class="title" *ngIf="product.active" style="overflow: scroll">
+            {{product.title}}</ion-row>
+            <ion-row style="margin-top:-6px;">
+
+            <ion-col col-6 class="price">
+              <div class="dummy-price" *ngIf="product.dummyPrice">
+                <p>{{currency}}{{product.dummyPrice | number:'.0-0'}}</p>
+              </div>
+              
+            </ion-col>
+
+            <ion-col col-6 *ngIf="product.price">
+              <button ion-button class="btn" float-right text-center>{{currency}}{{product.price | number:'.0-0'}}</button>
+            </ion-col>
+          </ion-row>
+          
+
+        </ion-col>
+
+      </ion-row>
+            <!-- grid item -->
+    </div>
+        <!-- grid-view -->
+  </div>
+    <!-- main wrapper -->
+</ion-content>
+<!-- common footer -->
+<page-footer></page-footer>

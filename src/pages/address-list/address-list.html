@@ -1,0 +1,34 @@
+<ion-header>
+  <custom-header [header]="header_data"></custom-header>
+</ion-header>
+
+<ion-content padding class="address-list">
+
+  <!--New  Address-->
+  <div>
+    <div>
+      <ion-item class="add" (click)="addAddress()">{{"Add New Address" | translate}}
+        <ion-icon name="add"></ion-icon>
+      </ion-item>
+    </div>
+    <!--saved address list-->
+    <ion-list radio-group class="address-radio">
+      <ion-item *ngFor="let address of addressList">
+        <ion-label>
+          <p class="show-address">{{address.userName}} </p>
+          <p class="show-address">{{address.addressline}}</p>
+          <p class="show-address">{{address.city}}</p>
+          <p class="show-address">{{address.state}}</p>
+          <p class="show-address">{{address.pincode}}</p>
+        </ion-label>
+        <ion-radio (ionSelect)="selectAddress(address)"></ion-radio>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <button class="footer-button" ion-button block class="continue-btn" (click)="checkOut()"> {{"Continue" | translate}} &nbsp;
+    <ion-icon name="arrow-forward"></ion-icon>
+  </button>
+</ion-footer>

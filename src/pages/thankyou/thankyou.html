@@ -1,0 +1,11 @@
+<ion-header>
+    <custom-header [header]="header_data"></custom-header>
+</ion-header>
+
+<ion-content class="thankyou" padding>
+    <ion-icon name="thumbs-up"></ion-icon>
+
+    <h4>{{"Congratulations ! Your order has been accepted" | translate}}.</h4>
+    <p>{{thankYouMessage}}</p>
+    <button ion-button outline class="continue-btn" (click)="home()">{{"Shop more" | translate}}</button>
+</ion-content>
